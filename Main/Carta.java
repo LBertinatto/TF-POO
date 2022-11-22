@@ -7,6 +7,8 @@ public class Carta {
     private Raridade raridade;
 
     public Carta(String nome, Raridade raridade) {
+        this.nome=nome;
+        this.raridade=raridade;
     }
     
     public String getNome() {
