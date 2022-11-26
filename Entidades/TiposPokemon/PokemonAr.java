@@ -1,26 +1,42 @@
 package Entidades.TiposPokemon;
 
 import Entidades.Pokemon;
+import Main.Enums.Elementos;
 import Main.Enums.Raridade;
 
 public class PokemonAr extends Pokemon {
 
-    public PokemonAr(String nome, int vida, int attackPoints, Raridade raridade) {
-        super(nome, vida, attackPoints, raridade);
+    public PokemonAr(String nome, Raridade raridade) {
+        super(nome, raridade, Elementos.AR);
     }
-    
+
     /*
-     * Tabela de danos - Tipo Ar:
-     * Água: Ultra-Eficaz (2x)
-     * Planta: Fraco (0.5x)
-     * Fogo e Ar: Ataque Normal (1x)
+     agua > pedra
+agua > fogo
+agua < planta
+agua < ar
+fogo > pedra
+fogo < agua
+fogo > planta
+fogo < ar
+planta > agua
+planta < fogo
+planta < pedra
+planta > ar
+ar < pedra
+ar > agua
+ar > fogo
+ar < planta
+pedra > planta
+pedra < fogo
+pedra > ar
+pedra < agua
      */
-    
+
     @Override
-    public int dano(Pokemon p){
-        if(p instanceof PokemonAgua) return this.getAttackPoints() * 2;
-        if (p instanceof PokemonPlanta) return (int)(this.getAttackPoints() * 0.5);
-        else return super.dano(p);
+    public void atacar(Pokemon p){
+        if(p.getElemento()==Elementos.PEDRA|| p.getElemento()==Elementos.PLANTA) p.recebeAtaque(this.getAttackPoints()*0.8);
+        else p.recebeAtaque(this.getAttackPoints()*1.2);
     }
 }
 

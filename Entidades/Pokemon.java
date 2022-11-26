@@ -1,59 +1,45 @@
 package Entidades;
 import Main.*;
+import Main.Enums.Elementos;
 import Main.Enums.Raridade;
 
-public class Pokemon extends Carta{
-    private int vida;
+public abstract class Pokemon extends Carta{
+    private double vida;
     private int attackPoints;
     private boolean isDead;
+    private Raridade raridade;
+    private Elementos elemento;
 
-    public Pokemon(String nome, int vida, int attackPoints, Raridade raridade) {
-        super(nome, raridade);
-        this.vida = vida;
-        this.attackPoints = attackPoints;
+    public Pokemon(String nome, Raridade raridade, Elementos elemento) {
+        super(nome);
+        this.raridade = raridade;
+        this.elemento = elemento;
+        setVida();
+        setAttackPoints();
     }
 
-    public boolean isDead() {
-        if (this.vida <= 0) {
-            this.isDead = true;
-        }
-        return isDead;
-    }
+    public boolean isDead() {return isDead;}
 
-    public void setDead(boolean dead) {
-        isDead = dead;
-    }
-
-    public void dead(Pokemon p) {
-        if (p.isDead) {
-            System.out.println("O pokemon " + this.getNome()+ " " + p.getNome() + " está morto");
+    public void checkDeath() {
+        if (vida<=0) {
+            isDead = true;
+            System.out.println("O pokemon " + " " + this.getNome() + " está morto");
         }
     }
 
-    /**
-     * Diminui a vida do pokemon atacado conforme os 
-     * multiplcadores de tipo e raridade
-     */
-    public void ataque(Pokemon p) {
-        if (this.getRaridade() == Raridade.COMUM) {
-            p.setVida(p.getVida() - dano(p));
-            
-        } else if (this.getRaridade() == Raridade.RARO) {
-            p.setVida(p.getVida() - (int)(dano(p) * 1.3));
-        } else {
-            p.setVida(p.getVida() - (int)(dano(p) * 1.7));
-        }
-    }
 
     /**
      * Retorna o dano sofrido 
      * confome os multiplicadores de tipo
      */
-    public int dano(Pokemon p){
-        return getAttackPoints();
+    public abstract void atacar(Pokemon p);
+
+    public void recebeAtaque(double dano) {
+        vida-=dano;
+        checkDeath();
     }
 
-    public int getVida() {
+    public double getVida() {
         return vida;
     }
 
@@ -61,12 +47,33 @@ public class Pokemon extends Carta{
         this.vida = vida;
     }
 
+
+
     public int getAttackPoints() {
         return attackPoints;
     }
 
-    public void setAttackPoints(int attackPoints) {
-        this.attackPoints = attackPoints;
+    public Raridade getRaridade() {
+        return raridade;
     }
 
+    public void setRaridade(Raridade raridade) {
+        this.raridade = raridade;
+    }
+
+    private void setAttackPoints() {
+        if (raridade==Raridade.COMUM) attackPoints = 20;
+        if (raridade==Raridade.COMUM) attackPoints = 25;
+        if (raridade==Raridade.COMUM) attackPoints = 30;
+    }
+
+    public Elementos getElemento() {
+        return elemento;
+    }
+
+    private void setVida() {
+        if (raridade==Raridade.COMUM) vida = 100;
+        if (raridade==Raridade.COMUM) vida = 120;
+        if (raridade==Raridade.COMUM) vida = 150;
+    }
 }

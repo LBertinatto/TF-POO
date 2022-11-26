@@ -5,11 +5,11 @@ import Main.Enums.Raridade;
 public class Treinador extends Carta {
     
     private String descricao;
-    private String tipo;
+    private int tipo;
 
-    public Treinador(String nome, Raridade raridade, String descricao, String tipo) {
-        super(nome, raridade);
-        this.descricao=descricao;
+    public Treinador(String nome, int tipo) {
+        super(nome);
+        setDescricao();
         this.tipo=tipo;
     }
     
@@ -17,8 +17,14 @@ public class Treinador extends Carta {
         return descricao;
     }
     
-    public String getTipo()    {
+    public int getTipo()    {
         return tipo;
     }
-    
+    private void setDescricao() {
+        if (tipo==1) this.descricao = "Recupera o HP completo do Pokemon";
+        if (tipo==2) this.descricao = "Aumenta em 25% o dano do Pokemon";
+        if (tipo==3) this.descricao = "Recupera o último pokemon morto";
+        if (tipo==4) this.descricao = "Evolui o pokemon";
+
+    }
 }
