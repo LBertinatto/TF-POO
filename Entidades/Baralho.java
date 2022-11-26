@@ -9,16 +9,15 @@ import Entidades.TiposPokemon.PokemonPedra;
 import Entidades.TiposPokemon.PokemonPlanta;
 
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 //classe responsavel por criar o baralho geral
 public class Baralho {
-    private List<Carta> baralho = new ArrayList<>();
+    private final List<Carta> baralho = new ArrayList<>();
+    private List<Carta> baralhoAux = new ArrayList<>();
+    private List<Carta> deque = new ArrayList<>();
 
-    public void criarBaralho()  {
+    public void criaBaralho()  {
         //todos os pokemons tipo agua: 5comum 3raro 1lendario
         baralho.add(new PokemonAgua("Popplio", Raridade.COMUM));
         baralho.add(new PokemonAgua("Magikarp", Raridade.COMUM));
@@ -82,13 +81,33 @@ public class Baralho {
 
         //embaralhar cartas
         Collections.shuffle(baralho);
-
     }
 
     public void imprimeBaralho()    {
-        for (Carta p : baralho)   {
-            System.out.println(p.getNome());
+        for (Carta c : baralho)   {
+            System.out.println(c.getNome());
         }
+    }
+
+    public List<Carta> criaDeque() {
+        criaBaralho();
+        Random random = new Random();
+
+            //criar baralho auxiliar para evitar repetições
+            baralhoAux.addAll(baralho);
+
+            //criar deque com 30 cartas
+            for (int i = 0; i < 30; i++) {
+                int randomIndex = random.nextInt(baralhoAux.size());
+                Carta randomCarta = baralhoAux.get(randomIndex);
+                //adiciona carta aleatoria no deque
+                deque.add(randomCarta);
+                //evita repetição de cartas
+                baralhoAux.remove(randomIndex);
+        }
+
+        //retorna lista pra poder ser usado na classe Jogador
+        return deque;
     }
 
 }
