@@ -24,10 +24,8 @@ public class Jogador {
         return deque.getDeque();
     }
 
-
-
-    public void compraCarta()    {
-
+    public Mao getMao() {
+        return mao;
     }
 
 }

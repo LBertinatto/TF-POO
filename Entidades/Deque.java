@@ -12,12 +12,19 @@ public class Deque {
     public Deque() {
         baralho = new Baralho();
         deque = new ArrayList<>();
-        for (int i=0; i<15; i++) deque.add(baralho.getPokemon().get(i));
-        for (int i=0; i<15; i++) deque.add(baralho.getBaralho().get(i));
+        for (int i=0; i<30; i++) deque.add(baralho.getBaralho().get(i));
 
     }
 
     public List<Carta> getDeque() {
         return deque;
     }
+
+    //retira a carta do deque e retorna a carta retirada
+    public Carta retiraCarta()    {
+        Carta cartaRetirada = deque.get(deque.size());
+        deque.remove(deque.size());
+        return cartaRetirada;
+    }
+
 }
