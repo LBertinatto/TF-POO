@@ -89,8 +89,11 @@ public class Baralho {
         }
     }
 
+    public List<Carta> getBaralho() {
+        return baralho;
+    }
+
     public List<Carta> criaDeque() {
-        criaBaralho();
         Random random = new Random();
 
             //criar baralho auxiliar para evitar repetições
