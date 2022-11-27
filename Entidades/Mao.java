@@ -24,8 +24,15 @@ public class Mao {
 
 
     public Carta getCartaDaMao(String nome)    {
-        return mao.stream().filter(p -> p.getNome().equals(nome)).collect(Collectors.toList()).get(0);
+        Carta carta = mao.stream().filter(p -> p.getNome().equals(nome)).toList().get(0);
+        mao.remove(carta);
+        return carta;
     }
 
-
+    @Override
+    public String toString() {
+        StringBuilder line = new StringBuilder();
+        mao.forEach(p -> line.append(p.toString()+ "\n"));
+        return line.toString();
+    }
 }

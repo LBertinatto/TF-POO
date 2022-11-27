@@ -27,8 +27,8 @@ public class Reserva {
         }
         return poke;
     }
-    public Pokemon trocaReservaMao(Pokemon antigo, Pokemon novo) {
-        Pokemon old = getPokeNaReserva(antigo.getNome());
+    public Pokemon trocaReservaMao(String  antigo, Pokemon novo) {
+        Pokemon old = getPokeNaReserva(antigo);
         if (old.getVida()<old.getMaxVida()) System.out.println("Pokémon que sofreu dano não pode ser trocado");
         else {
             reserva.remove(old);
@@ -37,18 +37,29 @@ public class Reserva {
         }
         return null;
     }
-    public Pokemon trocaReservaPrincipal(Pokemon antigo, Pokemon novo) {
-        Pokemon old = getPokeNaReserva(antigo.getNome());
+    public Pokemon trocaReservaPrincipal(String antigo, Pokemon novo) {
+        Pokemon old = getPokeNaReserva(antigo);
             reserva.remove(old);
-            reserva.add(novo);
+            if(novo!=null) reserva.add(novo);
             return old;
     }
 
-    public Pokemon trocaPokemonMorto(Pokemon pokemon) {
+    public Pokemon trocaPokemonMorto(String pokemon) {
         maxTamanhoReserva--;
         if (maxTamanhoReserva<0) maxTamanhoReserva=0;
-        Pokemon old = getPokeNaReserva(pokemon.getNome());
+        Pokemon old = getPokeNaReserva(pokemon);
         reserva.remove(old);
         return old;
+    }
+
+    public List<Pokemon> getReserva() {
+        return reserva;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder line = new StringBuilder();
+        reserva.forEach(p -> line.append(p.toString()+ "\n"));
+        return line.toString();
     }
 }

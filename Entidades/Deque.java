@@ -23,7 +23,7 @@ public class Deque {
     //retira a carta do deque e retorna a carta retirada
     public Carta retiraCarta()    {
         Carta cartaRetirada = deque.get(deque.size()-1);
-        deque.remove(deque.size());
+        deque.remove(deque.size()-1);
         return cartaRetirada;
     }
 

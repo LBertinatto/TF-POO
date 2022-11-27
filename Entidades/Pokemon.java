@@ -6,7 +6,6 @@ import Main.Enums.Raridade;
 public abstract class Pokemon extends Carta{
     private double vida;
     private int attackPoints;
-    private boolean isDead;
     private Raridade raridade;
     private Elementos elemento;
 
@@ -18,13 +17,9 @@ public abstract class Pokemon extends Carta{
         setAttackPoints();
     }
 
-    public boolean isDead() {return isDead;}
 
-    public void checkDeath() {
-        if (vida<=0) {
-            isDead = true;
-            System.out.println("O pokemon " + " " + this.getNome() + " está morto");
-        }
+    public boolean checkDeath() {
+        return (vida<=0);
     }
 
 
@@ -61,10 +56,13 @@ public abstract class Pokemon extends Carta{
         this.raridade = raridade;
     }
 
+    public void attackPointsBuff() {
+        attackPoints*=1.2;
+    }
     private void setAttackPoints() {
         if (raridade==Raridade.COMUM) attackPoints = 20;
-        if (raridade==Raridade.COMUM) attackPoints = 25;
-        if (raridade==Raridade.COMUM) attackPoints = 30;
+        if (raridade==Raridade.RARO) attackPoints = 25;
+        if (raridade==Raridade.LENDARIO) attackPoints = 30;
     }
 
     public Elementos getElemento() {
