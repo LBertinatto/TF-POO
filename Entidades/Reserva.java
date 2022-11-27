@@ -43,7 +43,7 @@ public class Reserva {
             reserva.add(novo);
             return old;
     }
-    
+
     public Pokemon trocaPokemonMorto(Pokemon pokemon) {
         maxTamanhoReserva--;
         if (maxTamanhoReserva<0) maxTamanhoReserva=0;

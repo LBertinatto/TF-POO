@@ -1,9 +1,6 @@
 package Main;
 
-import Entidades.Baralho;
-import Entidades.Deque;
-import Entidades.Mao;
-import Entidades.Pokemon;
+import Entidades.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +10,20 @@ public class Jogador {
     private Pokemon pokemonAtivo;
     private Deque deque;
     private Mao mao;
+    private Reserva reserva;
+    private Pilha pilha;
 
     public Jogador() {
         //pega deque criado pelo metodo
         deque = new Deque();
-        Mao m = new Mao(deque);
+        Mao mao = new Mao();
         baralho  = new Baralho();
+        reserva = new Reserva();
+        pilha = new Pilha();
+    }
+
+    private void getMaoInicial() {
+        for (int i=0;i<7;i++) mao.addCartaNaMao(deque.getDeque().get(i));
     }
 
     //retorna deque
@@ -29,5 +34,7 @@ public class Jogador {
     public Mao getMao() {
         return mao;
     }
+
+
 
 }

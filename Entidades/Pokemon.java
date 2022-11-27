@@ -79,4 +79,9 @@ public abstract class Pokemon extends Carta{
     private void setVida() {
         vida = getMaxVida();
     }
+
+    @Override
+    public String toString() {
+        return getNome() + " " + getElemento() + " " + getRaridade();
+    }
 }
