@@ -78,6 +78,14 @@ public class Baralho {
         baralho.add(new Treinador("Professor Nogueira",2));
         baralho.add(new Treinador("Professora Bruna", 3));
         baralho.add(new Treinador("Cintia",4));
+        baralho.add(new Treinador("Lilian",1));
+        baralho.add(new Treinador("Luan",2));
+        baralho.add(new Treinador("Sonia", 3));
+        baralho.add(new Treinador("Rose",4));
+        baralho.add(new Treinador("Copycat",1));
+        baralho.add(new Treinador("Guzma",2));
+        baralho.add(new Treinador("Judge", 3));
+        baralho.add(new Treinador("Hala",4));
 
         //embaralhar cartas
         Collections.shuffle(baralho);

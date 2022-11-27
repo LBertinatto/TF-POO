@@ -14,7 +14,6 @@ public class Jogador {
     private Pilha pilha;
 
     public Jogador() {
-        //pega deque criado pelo metodo
         deque = new Deque();
         Mao mao = new Mao();
         baralho  = new Baralho();
