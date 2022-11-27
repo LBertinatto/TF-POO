@@ -10,14 +10,14 @@ import Entidades.TiposPokemon.PokemonPlanta;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 //classe responsavel por criar o baralho geral
 public class Baralho {
     private final List<Carta> baralho = new ArrayList<>();
-    private List<Carta> baralhoAux = new ArrayList<>();
     private List<Carta> deque = new ArrayList<>();
 
-    public void criaBaralho()  {
+    public Baralho()  {
         //todos os pokemons tipo agua: 5comum 3raro 1lendario
         baralho.add(new PokemonAgua("Popplio", Raridade.COMUM));
         baralho.add(new PokemonAgua("Magikarp", Raridade.COMUM));
@@ -93,24 +93,14 @@ public class Baralho {
         return baralho;
     }
 
-    public List<Carta> criaDeque() {
-        Random random = new Random();
-
-            //criar baralho auxiliar para evitar repetições
-            baralhoAux.addAll(baralho);
-
-            //criar deque com 30 cartas
-            for (int i = 0; i < 30; i++) {
-                int randomIndex = random.nextInt(baralhoAux.size());
-                Carta randomCarta = baralhoAux.get(randomIndex);
-                //adiciona carta aleatoria no deque
-                deque.add(randomCarta);
-                //evita repetição de cartas
-                baralhoAux.remove(randomIndex);
-        }
-
-        //retorna lista pra poder ser usado na classe Jogador
-        return deque;
+    public void embaralharBaralho() {
+        Collections.shuffle(baralho);
     }
 
+    public List<Carta> getPokemon() {
+        return baralho.stream().filter(x -> x.getClass().equals("Pokemon")).collect(Collectors.toList());
+    }
+
+
 }
+

@@ -8,7 +8,7 @@ public class Main {
         Jogador j1 = new Jogador();
         Jogador j2 = new Jogador();
 
-        baralho.criaBaralho();
+
 
 
     }
