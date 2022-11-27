@@ -12,4 +12,8 @@ public abstract class Carta {
         return nome;
     }
 
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

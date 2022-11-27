@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 //classe responsavel por criar o baralho geral
 public class Baralho {
     private final List<Carta> baralho = new ArrayList<>();
-    private List<Carta> deque = new ArrayList<>();
+
 
     public Baralho()  {
         //todos os pokemons tipo agua: 5comum 3raro 1lendario
