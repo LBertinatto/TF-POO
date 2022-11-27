@@ -15,8 +15,8 @@ public class Jogador {
 
     public Jogador() {
         //pega deque criado pelo metodo
-        Mao m = new Mao();
         deque = new Deque();
+        Mao m = new Mao(deque);
     }
 
     //retorna deque

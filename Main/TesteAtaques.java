@@ -12,6 +12,9 @@ public class TesteAtaques {
 
         Baralho baralho = new Baralho();
         baralho.imprimeBaralho();
+        baralho.embaralharBaralho();
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/////////////");
+        baralho.imprimeBaralho();
     }
 
 }
