@@ -67,6 +67,7 @@ public class Jogo {
         if (jogador.getPokemonAtivo()==null) {
             System.out.println("Escolha um novo pokemon ativo");
             System.out.println("Reserva: \n" + jogador.getReserva());
+            in.nextLine();
             jogador.trocaAtivoMorto(in.nextLine());
         }
         boolean repeat = true;
