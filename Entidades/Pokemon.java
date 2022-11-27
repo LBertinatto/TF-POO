@@ -71,9 +71,12 @@ public abstract class Pokemon extends Carta{
         return elemento;
     }
 
+    public int getMaxVida() {
+        if (raridade==Raridade.COMUM) return  100;
+        if (raridade==Raridade.RARO) return  120;
+        return 150;
+    }
     private void setVida() {
-        if (raridade==Raridade.COMUM) vida = 100;
-        if (raridade==Raridade.COMUM) vida = 120;
-        if (raridade==Raridade.COMUM) vida = 150;
+        vida = getMaxVida();
     }
 }
