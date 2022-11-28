@@ -12,9 +12,6 @@ public class Pilha {
         lista = new ArrayList<>();
     }
 
-    public List<Pokemon> getLista() {
-        return lista;
-    }
 
     public void addPilha(Pokemon p) {
         lista.add(p);

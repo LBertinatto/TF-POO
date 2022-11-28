@@ -36,6 +36,7 @@ pedra < agua
     @Override
     public void atacar(Pokemon p){
         if(p.getElemento()==Elementos.AR || p.getElemento()==Elementos.PLANTA) p.recebeAtaque(this.getAttackPoints()*0.8);
+        else if (p.getElemento()==this.getElemento()) p.recebeAtaque(this.getAttackPoints());
         else p.recebeAtaque(this.getAttackPoints()*1.2);
     }
 }

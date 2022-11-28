@@ -91,19 +91,11 @@ public class Baralho {
         Collections.shuffle(baralho);
     }
 
-    public void imprimeBaralho()    {
-        for (Carta c : baralho)   {
-            System.out.println(c.getNome());
-        }
-    }
 
     public List<Carta> getBaralho() {
         return baralho;
     }
 
-    public void embaralharBaralho() {
-        Collections.shuffle(baralho);
-    }
 
     public List<Carta> getPokemon() {
         return baralho.stream().filter(x -> x.getClass().equals("Pokemon")).collect(Collectors.toList());

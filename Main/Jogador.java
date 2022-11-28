@@ -16,14 +16,14 @@ public class Jogador {
     private Jogador inimigo;
     private int pokemonVivos;
 
-    public Jogador(String nome) {
+    public Jogador() {
         //pega deque criado pelo metodo
         deque = new Deque();
         mao = new Mao();
         baralho  = new Baralho();
         reserva = new Reserva();
         pilha = new Pilha();
-        this.nome = nome;
+
         getMaoInicial();
     }
 
@@ -62,7 +62,7 @@ public class Jogador {
     public void usarTreinador(String nome) {
         Treinador treinador = (Treinador) mao.getCartaDaMao(nome);
         treinador.aplicaBuff(this);
-        mao.getCartaDaMao(nome);
+
     }
 
     public void atacar(Jogador inimigo) {
@@ -73,10 +73,7 @@ public class Jogador {
         mao.addCartaNaMao(deque.retiraCarta());
     }
 
-    //retorna deque
-    public List<Carta> getDeque() {
-        return deque.getDeque();
-    }
+
 
     public Mao getMao() {
         return mao;
@@ -89,6 +86,7 @@ public class Jogador {
         pilha.addPilha(pokemonAtivo);
         pokemonAtivo = reserva.trocaPokemonMorto(nome);
     }
+
     public Pokemon ressucitaPokemon() {
         return pilha.retiraPilha();
     }
@@ -122,6 +120,10 @@ public class Jogador {
 
     public String getNome() {
         return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String pokemonAtivoString() {

@@ -22,6 +22,9 @@ public class Mao {
         return mao;
     }
 
+    public List<Carta> getTreinadores() {
+        return mao.stream().filter(p -> p instanceof Treinador ).toList();
+    }
 
     public Carta getCartaDaMao(String nome)    {
         Carta carta = mao.stream().filter(p -> p.getNome().equals(nome)).toList().get(0);

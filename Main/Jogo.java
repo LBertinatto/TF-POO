@@ -105,9 +105,9 @@ public class Jogo {
             System.out.println("4 - Usar carta de Treinador");
             System.out.println("5 - Avançar");
             try {
-                int opção = in.nextInt();
+                int opcao = in.nextInt();
                 in.nextLine();
-                switch (opção) {
+                switch (opcao) {
                     case 1 -> {
                         if (jogador.getPokemonVivos() <= 1) {
                             System.out.println("Sem pokemons na reserva");
@@ -162,8 +162,8 @@ public class Jogo {
         System.out.println("1 - Atacar inimigo");
         System.out.println("2 - Comprar uma carta");
         try {
-            int opção = in.nextInt();
-            if (opção == 1) jogador.atacar(jogador.getInimigo());
+            int opcao = in.nextInt();
+            if (opcao == 1) jogador.atacar(jogador.getInimigo());
             else jogador.comprarCarta();
         }
         catch (Exception e) {
