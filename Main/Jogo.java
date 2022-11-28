@@ -10,17 +10,18 @@ public class Jogo {
     Scanner in;
 
     public Jogo() {
-        p2 = new Jogador("P1");
-        p1  = new Jogador("P2");
+        p2 = new Jogador();
+        p1  = new Jogador();
         p1.setInimigo(p2);
         p2.setInimigo(p1);
         vencedor = null;
-        turnos =0;
+        turnos = decidePrimeiroJogador();
         in = new Scanner(System.in);
+        decidePrimeiroJogador();
     }
 
-    public void decidePrimeiroJogador() {
-        int turnos = (int)Math.round(Math.random());
+    private int decidePrimeiroJogador() {
+        return (int)Math.round(Math.random());
     }
 
     private boolean morto(Jogador jogador) {
@@ -46,18 +47,33 @@ public class Jogo {
         System.out.println("--------Começo do Turno--------");
         System.out.println(jogador.getNome());
         System.out.println("Mão: \n" + jogador.getMao());
-        for (int i=0;i<5;i++) {
+        while (jogador.getReserva().getReserva().size()<5) {
             System.out.println("Escolha um pokemon para reserva");
-            String escolha = in.nextLine();
-            jogador.addPokeNaReserva(escolha);
-            System.out.println("Deseja colocar outro? (s/n)");
-            escolha = in.nextLine();
-            if (escolha.equals("n")) break;
+            try {
+                String escolha = in.nextLine();
+                jogador.addPokeNaReserva(escolha);
+                if (jogador.getReserva().getReserva().size()<5) {
+                    System.out.println("Deseja colocar outro? (s/n)");
+                    escolha = in.nextLine();
+                    if (escolha.equals("n")) break;
+                    else if (!escolha.equals("s")) {
+                        System.out.println("Escolha inválida");
+                    }
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Opção Inválida");
+            }
         }
         System.out.println("Escolha um pokemon principal");
         System.out.println("Reserva: \n" + jogador.getReserva());
         String escolha = in.nextLine();
-        jogador.trocaPokeAtivo(escolha);
+        try {
+            jogador.trocaPokeAtivo(escolha);
+        }
+        catch (Exception e) {
+            System.out.println("Opção Inválida");
+        }
         System.out.println("Fim do turno");
         turnos++;
     }
@@ -67,8 +83,14 @@ public class Jogo {
         if (jogador.getPokemonAtivo()==null) {
             System.out.println("Escolha um novo pokemon ativo");
             System.out.println("Reserva: \n" + jogador.getReserva());
-            in.nextLine();
-            jogador.trocaAtivoMorto(in.nextLine());
+            try {
+                in.nextLine();
+                jogador.trocaAtivoMorto(in.nextLine());
+            }
+            catch (Exception e) {
+                System.out.println("Opção Inválida");
+            }
+
         }
         boolean repeat = true;
         while (repeat) {
@@ -82,40 +104,83 @@ public class Jogo {
             System.out.println("3 - Trocar Pokemon da reserva");
             System.out.println("4 - Usar carta de Treinador");
             System.out.println("5 - Avançar");
-            int opção = in.nextInt();
-            switch (opção) {
-                case 1:
-                    System.out.println("Escolha o pokemon ativo");
-                    jogador.trocaPokeAtivo(in.nextLine());
-                    break;
-                case 2:
-                    System.out.println("Escolha o pokemon para reserva");
-                    jogador.addPokeNaReserva(in.nextLine());
-                    break;
-                case 3:
-                    System.out.println("Escolha o pokemon para trocar");
-                    String name = in.nextLine();
-                    System.out.println("Escolha o pokemon para reserva");
-                    jogador.trocaPokeNaReserva(name, in.nextLine());
-                    break;
-                case 4:
-                    System.out.println("Escolha a carta de treinador");
-                    jogador.usarTreinador(in.nextLine());
-                    break;
-                case 5: repeat = false;
+            try {
+                int opção = in.nextInt();
+                in.nextLine();
+                switch (opção) {
+                    case 1 -> {
+                        if (jogador.getPokemonVivos() <= 1) {
+                            System.out.println("Sem pokemons na reserva");
+                            break;
+                        }
+                        System.out.println("Escolha o pokemon ativo");
+                        jogador.trocaPokeAtivo(in.nextLine());
+                    }
+                    case 2 -> {
+                        if (jogador.getMao().getMao().size() <= 0) {
+                            System.out.println("Sem pokemons na mão");
+                            break;
+                        }
+                        System.out.println("Escolha o pokemon para reserva");
+                        System.out.println(jogador.getMao());
+                        jogador.addPokeNaReserva(in.nextLine());
+                    }
+                    case 3 -> {
+                        if (jogador.getPokemonVivos() <= 1) {
+                            System.out.println("Sem pokemons na reserva");
+                            break;
+                        }
+                        if (jogador.getMao().getMao().size() <= 0) {
+                            System.out.println("Sem pokemons na mão");
+                            break;
+                        }
+                        System.out.println("Escolha o pokemon para trocar");
+                        System.out.println(jogador.getReserva());
+                        String name = in.nextLine();
+                        System.out.println("Escolha o pokemon para reserva");
+                        System.out.println(jogador.getMao());
+                        jogador.trocaPokeNaReserva(name, in.nextLine());
+                    }
+                    case 4 -> {
+                        if (jogador.getMao().getTreinadores().size() <= 0) {
+                            System.out.println("Sem treinadores na mão");
+                            break;
+                        }
+                        System.out.println("Escolha a carta de treinador");
+                        System.out.println(jogador.getMao().getTreinadores());
+                        jogador.usarTreinador(in.nextLine());
+                    }
+                    default -> repeat = false;
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Opção Inválida");
             }
         }
+
         System.out.println("Escolha uma ação: ");
         System.out.println("1 - Atacar inimigo");
         System.out.println("2 - Comprar uma carta");
-        int opção = in.nextInt();
-        if (opção==1) jogador.atacar(jogador.getInimigo());
-        else jogador.comprarCarta();
+        try {
+            int opção = in.nextInt();
+            if (opção == 1) jogador.atacar(jogador.getInimigo());
+            else jogador.comprarCarta();
+        }
+        catch (Exception e) {
+            System.out.println("Opção Inválida");
+        }
         System.out.println("Fim do turno");
         turnos++;
     }
 
+    private void escolherNomesDosJogadores() {
+        System.out.println("Escolha o nome do player 1");
+        p1.setNome(in.nextLine());
+        System.out.println("Escolha o nome do player 2");
+        p2.setNome(in.nextLine());
+    }
     public void jogar () {
+        escolherNomesDosJogadores();
         primeiroTurno(jogadorAtual());
         primeiroTurno(jogadorAtual());
         while(!checkVencedor()) {
